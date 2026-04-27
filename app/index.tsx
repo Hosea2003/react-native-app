@@ -1,6 +1,20 @@
+import { getPosts, Post } from "@/data/posts";
+import { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const data = await getPosts();
+      setPosts(data);
+    }
+
+    fetchPosts();
+  }, []);
+
   return (
     // <SafeAreaView style={style.container}>
     //   <TextInput
@@ -42,6 +56,16 @@ export default function Index() {
     //     renderItem={({ item }) => <UserCard data={item} />}
     //   />
     // </SafeAreaView>
-    <SafeAreaView></SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
+            <Text>{item.body}</Text>
+          </View>
+        )}
+      />
+    </SafeAreaView>
   );
 }
