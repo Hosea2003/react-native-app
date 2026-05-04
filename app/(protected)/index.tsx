@@ -1,7 +1,6 @@
 import { getPosts, Post } from "@/data/posts";
+import { Redirect } from "expo-router";
 import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -56,16 +55,17 @@ export default function Index() {
     //     renderItem={({ item }) => <UserCard data={item} />}
     //   />
     // </SafeAreaView>
-    <SafeAreaView style={{ flex: 1 }}>
-      <FlatList
-        data={posts}
-        renderItem={({ item }) => (
-          <View>
-            <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
-            <Text>{item.body}</Text>
-          </View>
-        )}
-      />
-    </SafeAreaView>
+    // <SafeAreaView style={{ flex: 1 }}>
+    //   <FlatList
+    //     data={posts}
+    //     renderItem={({ item }) => (
+    //       <View>
+    //         <Text style={{ fontWeight: "bold" }}>{item.title}</Text>
+    //         <Text>{item.body}</Text>
+    //       </View>
+    //     )}
+    //   />
+    // </SafeAreaView>
+    <Redirect href={"/login"} />
   );
 }
