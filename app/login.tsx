@@ -1,4 +1,5 @@
 import { login } from "@/data/users";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Button, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,6 +9,8 @@ const LoginScreen = () => {
     email: "",
     password: "",
   });
+
+  const router = useRouter();
 
   const handleLogin = async () => {
     const user = await login(data);
@@ -48,6 +51,7 @@ const LoginScreen = () => {
         onChangeText={(text) => setData({ ...data, password: text })}
       />
       <Button title="Login" onPress={handleLogin} />
+      <Button title="Go to register" onPress={() => router.push("/register")} />
     </SafeAreaView>
   );
 };
